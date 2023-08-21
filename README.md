@@ -1,68 +1,24 @@
 # README
 
-## users テーブル
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-|Column                          |Type   |Options   |
-|--------------------------------|-------|----------|
-|nickname                        |string |null:false|
-|email                           |string |null:false|
-|encrypted_password              |string |null:false|
-|last_name(full_width)           |string |null:false|
-|first_name(full_width)          |string |null:false|
-|last_name(full_width_katakana)  |string |null:false|
-|first_name(full_width_katakana) |string |null:false|
-|birthday                        |string |null:false|
+Things you may want to cover:
 
-### Association
-- has_many :items
-- has_many :purchase_records
+* Ruby version
 
+* System dependencies
 
+* Configuration
 
-## items　テーブル
+* Database creation
 
-|Column        |Type   |Options   |
-|--------------|-------|----------|
-|user_id       |string |null:false|
-|user_nickname |string |null:false|
-|item          |string |null:false|
-|explanation   |string |null:false|
-|category      |string |null:false|
-|status        |string |null:false|
-|shipping_fee  |string |null:false|
-|region_origin |string |null:false|
-|price         |string |null:false|
-|image         |string |null:false|
+* Database initialization
 
-### Association
-- belongs_to :users
-- has_one_to :purchase_records
+* How to run the test suite
 
+* Services (job queues, cache servers, search engines, etc.)
 
+* Deployment instructions
 
-## purchase_records テーブル
-
-|Column           |Type   |Options   |
-|-----------------|-------|----------|
-|user_id          |string |null:false|
-|item_id          |string |null:false|
-|shipping_area_id |string |null:false|
-
-### Association
-- belongs_to :users
-- belongs_to :items
-- has_one_to :shipping_areas
-
-
-
-
-## shipping_areas
-
-|Column             |Type   |Options   |
-|-------------------|-------|----------|
-|purchase_record_id |string |null:false|
-|shipping_address   |string |null:false|
-
-
-### Association
-- belongs_to :purchase_records
+* ...
