@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-|Column                          |Type   |Options   |
-|--------------------------------|-------|----------|
-|nickname                        |string |null:false|
-|email                           |string |null:false|
-|encrypted_password              |string |null:false|
-|last_name(full_width)           |string |null:false|
-|first_name(full_width)          |string |null:false|
-|last_name(full_width_katakana)  |string |null:false|
-|first_name(full_width_katakana) |string |null:false|
-|birthday                        |string |null:false|
+| Column                          | Type   | Options    |
+| ------------------------------- | ------ | ---------- |
+| nickname                        | string | null:false |
+| email                           | string | null:false |
+| encrypted_password              | string | null:false |
+| last_name_full_width            | string | null:false |
+| first_name_full_width           | string | null:false |
+| last_name_full_width_katakana   | string | null:false |
+| first_name_full_width_katakana  | string | null:false |
+| birthday                        | date   | null:false |
 
 ### Association
 - has_many :items
@@ -19,50 +19,57 @@
 
 
 
-## items　テーブル
+## items テーブル
 
-|Column        |Type   |Options   |
-|--------------|-------|----------|
-|user_id       |string |null:false|
-|user_nickname |string |null:false|
-|item          |string |null:false|
-|explanation   |string |null:false|
-|category      |string |null:false|
-|status        |string |null:false|
-|shipping_fee  |string |null:false|
-|region_origin |string |null:false|
-|price         |string |null:false|
-|image         |string |null:false|
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| name             | string     | null:false                    |
+| explanation      | text       | null:false                    |
+| category         | integer    | null:false                    |
+| status           | integer    | null:false                    |
+| shipping_fee     | integer    | null:false                    |
+| prefectures      | integer    | null:false                    |
+| preparation_days | integer    | null:false                    |
+| price            | integer    | null:false                    |
+| user             | references | null:false, foreign_key: true |
+
 
 ### Association
-- belongs_to :users
-- has_one_to :purchase_records
-
+- belongs_to :user
+- has_one :purchase_record
+- belongs_to_active_hash :category
+- belongs_to_active_hash :status
+- belongs_to_active_hash :shipping_fee
+- belongs_to_active_hash :prefectures
+- belongs_to_active_hash :preparation_days
 
 
 ## purchase_records テーブル
 
-|Column           |Type   |Options   |
-|-----------------|-------|----------|
-|user_id          |string |null:false|
-|item_id          |string |null:false|
-|shipping_area_id |string |null:false|
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| user   | references | null:false, foreign_key: true |
+| item   | references | null:false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to :items
-- has_one_to :shipping_areas
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping_area
 
 
 
+## shipping_areas テーブル
 
-## shipping_areas
-
-|Column             |Type   |Options   |
-|-------------------|-------|----------|
-|purchase_record_id |string |null:false|
-|shipping_address   |string |null:false|
-
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| postal_code      | string     | null:false                    |
+| prefectures      | integer    | null:false                    |
+| city             | string     | null:false                    |
+| address          | string     | null:false                    |
+| building__name   | string     | null:false                    |
+| phone_number     | string     | null:false                    |
+| purchase_record  | references | null:false, foreign_key: true |
 
 ### Association
-- belongs_to :purchase_records
+- belongs_to :purchase_record
+- belongs_to_active_hash :prefectures
