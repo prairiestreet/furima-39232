@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
   describe 'ユーザー新規登録' do
     context '新規登録できる場合' do
-      it "nameとemail、passwordとpassword_confirmationが存在すれば登録できる" do
+      it 'nameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
         expect(@user).to be_valid
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe User, type: :model do
         @user.password = 'test1'
         @user.password_confirmation = 'test1'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
 
       it 'passwordとpassword_confirmationが不一致では登録できない' do
@@ -78,8 +78,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'お名前(全角)は、全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
-        @user.last_name_full_width = '山田' 
-        @user.first_name_full_width = '太郎' 
+        @user.last_name_full_width = '山田'
+        @user.first_name_full_width = '太郎'
         @user.valid?
         expect(@user.errors.full_messages).to be_empty
       end

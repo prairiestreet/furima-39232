@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [
                                         :nickname, :last_name_full_width,
                                         :first_name_full_width, :last_name_full_width_katakana,
-                                        :first_name_full_width_katakana, :birthday,
+                                        :first_name_full_width_katakana, :birthday
                                       ])
   end
 
