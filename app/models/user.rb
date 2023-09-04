@@ -9,14 +9,7 @@ class User < ApplicationRecord
   validates :last_name_full_width_katakana, :first_name_full_width_katakana,
             format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'is invalid. Input full-width katakana characters' }
   validates :last_name_full_width, :first_name_full_width,
-            format: { with: /\A[\p{hiragana}\p{katakana}\p{blank}ー－]+\z/, message: 'is invalid. Input full-width characters' }
-  validate :password_complexity
-
-  private
-
-  def password_complexity
-    return if password.blank? || (password =~ /[a-zA-Z]/ && password =~ /[0-9]/)
-
-    errors.add :password, 'is invalid. Include both letters and numbers'
-  end
+            format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'is invalid. Input full-width characters' }
+            PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+            validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください' 
 end
