@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.order("created_at DESC")
+    @articles = Article.order('created_at DESC')
   end
 
   def new
@@ -19,7 +19,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title,:text,:genre_id)
+    params.require(:article).permit(:title, :text, :genre_id)
   end
-  
 end
