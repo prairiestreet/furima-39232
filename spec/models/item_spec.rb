@@ -58,7 +58,7 @@ RSpec.describe Item, type: :model do
       it '商品の状態の情報が「---」だと出品できない' do
         @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("status can't be blank")
+        expect(@item.errors.full_messages).to include("Status can't be blank")
       end
 
       it '配送料の負担の情報がないと出品できない' do
@@ -115,10 +115,10 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
-      it '価格に半角数字以外が含まれている場合は出品できない' do
-        @item.price = '１００００'
+      it 'priceが半角数字以外では登録できない' do
+        @item.price = '１０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters')
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
   end
