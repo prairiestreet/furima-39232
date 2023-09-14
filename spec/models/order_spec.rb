@@ -10,7 +10,7 @@ RSpec.describe Order, type: :model do
   describe '購入情報と発送先情報を保存' do
 
     context '内容に問題ない場合' do
-      it "全ての情報があれば登録できる" do
+      it "token含めて全ての情報があれば登録できる" do
        expect(@order).to be_valid
       end
 
@@ -93,6 +93,12 @@ RSpec.describe Order, type: :model do
         @order.item_id = nil
         @order.valid?
         expect(@order.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "tokenが空では登録できないこと" do
+        @order.token = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Token can't be blank")
       end
     end
   end

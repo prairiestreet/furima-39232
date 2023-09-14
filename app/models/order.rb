@@ -1,7 +1,7 @@
 class Order
   include ActiveModel::Model
   # purchase_recordsテーブルとshipping_areasテーブルに保存したいカラム名
-  attr_accessor :postal_code, :prefecture, :city, :address, :building_name, :phone_number, :user_id, :item_id
+  attr_accessor :postal_code, :prefecture, :city, :address, :building_name, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     # shipping_areaモデルのバリデーション
@@ -13,6 +13,8 @@ class Order
     # purchase_recordモデルのバリデーション
     validates :user_id
     validates :item_id
+    # トークンのバリデーション
+    validates :token
   end
 
   def save
