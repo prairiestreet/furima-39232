@@ -14,4 +14,5 @@ class User < ApplicationRecord
   validates_format_of :password, with: PASSWORD_REGEX, message: 'is invalid. Include both letters and numbers'
 
   has_many :items
+  has_many :purchase_records
 end

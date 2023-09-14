@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    return if current_user == @item.user
+    return unless current_user != @item.user || PurchaseRecord.exists?(item_id: @item.id)
 
     redirect_to root_path
   end
@@ -37,9 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if user_signed_in? && (current_user.id == @item.user_id)
-      @item.destroy
-    end
+    @item.destroy if user_signed_in? && (current_user.id == @item.user_id)
     redirect_to root_path
   end
 
